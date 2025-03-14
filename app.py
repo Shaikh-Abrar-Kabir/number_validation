@@ -1,3 +1,5 @@
+import time
+
 from flask import Flask, render_template, request, redirect, url_for, send_file, render_template_string, flash
 from datetime import datetime
 from flask_socketio import SocketIO
@@ -172,6 +174,7 @@ def bulk_verify():
                     result[rk[5]] if result and result[rk[0]] else "N/A" ,
                     result[rk[6]] if result and result[rk[0]] else "N/A"
                 ])
+                time.sleep(1)
             result_df = pd.DataFrame(validation_data, columns=[
                 "Phone Number", "Validation Result", "Local Format",
                 "Intl. Format", "Country", "Location", "Carrier", "Line Type"

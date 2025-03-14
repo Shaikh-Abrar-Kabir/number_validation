@@ -33,3 +33,4 @@ wsproto==1.2.0
 xyzservices==2025.1.0
 openpyxl
 xlsxwriter
+bcrypt

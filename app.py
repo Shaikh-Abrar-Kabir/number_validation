@@ -123,9 +123,14 @@ def bulk_verify():
 
         # Read Excel file using pandas
 
-        if file and (file.filename.endswith('.xls') or file.filename.endswith('.xlsx')):
-
-            df = pd.read_excel(file, engine='openpyxl')  # Specify the engine for .xlsx files
+        if file and (file.filename.endswith('.xls') or file.filename.endswith('.xlsx') or file.filename.endswith('.csv')):
+            if file.filename.endswith('.xlsx'):
+                df = pd.read_excel(file, engine='openpyxl')  # Use openpyxl for .xlsx files
+            elif file.filename.endswith('.xls'):
+                df = pd.read_excel(file)  # Default engine for .xls files
+            elif file.filename.endswith('.csv'):
+                df = pd.read_csv(file)
+            # df = pd.read_excel(file, engine='openpyxl')  # Specify the engine for .xlsx files
             current_month = datetime.now().month
             with open("present.json", "r") as f:
                 count_present = json.load(f)
@@ -149,7 +154,7 @@ def bulk_verify():
             NUMVERIFY_API_KEY = request.form.get('api_key')
             for index, row in df.iterrows():
 
-                raw_number = str(row['Phone Number'])
+                raw_number = str(row['Mobile Number'])
 
                 # Perform Numverify validation directly on the raw phone number
 

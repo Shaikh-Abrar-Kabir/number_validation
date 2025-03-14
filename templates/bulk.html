@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verification Results</title>
+
+    <style>
+
+        a.button {
+
+        display: inline-block;
+
+        background-color: #e91e63; /* Pink background color for the button */
+
+        color: #fff;
+
+        padding: 10px 20px;
+
+        text-decoration: none;
+
+        border-radius: 5px;
+
+        margin-top: 15px;
+
+        transition: background-color 0.3s ease;
+
+        }
+
+        a.button:hover {
+
+        background-color: #c2185b; /* Darker pink on hover */
+
+        }
+
+        body {
+
+            font-family: 'Arial', sans-serif;
+
+            background-color: #fce4ec; /* Light pink background color */
+
+            color: #333; /* Dark text color */
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+        h1 {
+
+            background-color: #e91e63; /* Pink background color for the heading */
+
+            color: #fff; /* White text color */
+
+            padding: 20px;
+
+            text-align: center;
+
+        }
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 20px;
+
+        }
+
+        th, td {
+
+            padding: 15px;
+
+            text-align: left;
+
+            border: 1px solid #ccc; /* Light gray border */
+
+        }
+
+        th {
+
+            background-color: #ff80ab; /* Lighter pink background color for header cells */
+
+            color: #fff; /* White text color */
+
+        }
+
+        tr:nth-child(even) {
+
+            background-color: #f8bbd0; /* Alternate row color for better readability */
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Verification Results</h1>
+
+    <table>
+
+        <tr>
+
+            <th>Phone Number</th>
+
+            <th>Validation Result</th>
+
+            <th>Local Format</th>
+
+            <th>Intl. Format</th>
+
+            <th>Country</th>
+
+            <th>Location</th>
+
+            <th>Carrier</th>
+
+            <th>Line Type</th>
+
+        </tr>
+
+        {% for number, result in results.items() %}
+
+            <tr>
+
+                <td>{{ number }}</td>
+
+                <td>{{ "✔️Valid" if result and result.valid else "❌Invalid" }}</td>
+
+                <td>{{ result.local_format if result and result.valid else "N/A" }}</td>
+
+                <td>{{ result.international_format if result and result.valid else "N/A" }}</td>
+
+                <td>{{ result.country_name if result and result.valid else "N/A" }}</td>
+
+                <td>{{ result.location if result and result.valid else "N/A" }}</td>
+
+                <td>{{ result.carrier if result and result.valid else "N/A" }}</td>
+
+                <td>{{ result.line_type if result and result.valid else "N/A" }}</td>
+
+            </tr>
+
+        {% endfor %}
+
+    </table>
+
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a class="button" href="{{ url_for('download_file') }}">
+                📥 Download Excel
+        </a>
+        <a class="button" href="/">Back to Home ?</a>
+    </div>
+    
+
+</body>
+
+</html>

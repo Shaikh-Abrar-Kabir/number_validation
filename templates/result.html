@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Validation Result</title>
+
+    <style>
+
+        html, body {
+
+            font-family: 'Times New Roman';
+
+            margin: 0;
+
+            padding: 0;
+
+            height: 100%;
+
+        }
+
+        body {
+
+            background: url('https://files.123freevectors.com/wp-content/original/119522-abstract-pastel-pink-background-image.jpg');
+
+            background-size: cover;
+
+            background-position: center;
+
+            color: #fff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+        #container {
+
+            background: rgba(255, 224, 230, 0.8); /* Light pink background */
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+            text-align: center;
+
+        }
+
+        h1 {
+
+            color: #333; /* Dark text color */
+
+            font-weight: bold;
+
+        }
+
+        p {
+
+            color: #333; /* Dark text color */
+
+        }
+
+        strong {
+
+            color: #333; /* Dark text color */
+
+        }
+
+        #error-message {
+
+            color: red; /* Pink color for error messages */
+
+            font-weight: bold;
+
+            margin-top: 15px;
+
+            font-size: 22px;
+
+        }
+
+        a.button {
+
+            display: inline-block;
+
+            background-color: #e91e63; /* Pink background color for the button */
+
+            color: #fff;
+
+            padding: 10px 20px;
+
+            text-decoration: none;
+
+            border-radius: 5px;
+
+            margin-top: 15px;
+
+            transition: background-color 0.3s ease;
+
+        }
+
+        a.button:hover {
+
+            background-color: #c2185b; /* Darker pink on hover */
+
+        }
+
+        a {
+
+            color: #fff;
+
+            text-decoration: none;
+
+        }
+
+        a:hover {
+
+            text-decoration: underline;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="container">
+
+        <h1>Validation Result</h1>
+
+        {% if result.valid %}
+
+            <!-- Valid phone number section -->
+
+            <p>The phone number is valid! ?✅</p>
+
+            <p><strong>Local Format:</strong> {{ result.local_format }}</p>
+
+            <p><strong>International Format:</strong> {{ result.international_format }}</p>
+
+            <p><strong>Country:</strong> {{ result.country_name }} ({{ result.country_code }})</p>
+
+            <p><strong>Location:</strong> {{ result.location }}</p>
+
+            <p><strong>Carrier:</strong> {{ result.carrier }}</p>
+
+            <p><strong>Line Type:</strong> {{ result.line_type }}</p>
+
+            <!-- Map Country link example (replace with actual map service link) -->
+
+            <a class="button" href="https://www.google.com/maps/search/{{ result.country_name }}">Locate Country ?</a>
+
+        {% else %}
+
+            <!-- Invalid phone number section -->
+
+            {% if result.error %}
+
+                <p id="error-message">Invalid phone number. Reason: {{ result.error.info }}</p>
+
+            {% else %}
+
+                <p id="error-message">Invalid phone number ?</p>
+
+            {% endif %}
+
+        {% endif %}
+
+        <br>
+
+        <a class="button" href="/">Back to Home ?</a>
+
+    </div>
+
+</body>
+
+</html>

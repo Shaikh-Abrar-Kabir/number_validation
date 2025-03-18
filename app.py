@@ -5,7 +5,7 @@ from datetime import datetime
 from flask_socketio import SocketIO
 from geopy.geocoders import Nominatim
 import folium,pandas as pd, json, requests, os, bcrypt, calendar
-
+import math
 app = Flask(__name__)
 
 socketio = SocketIO(app)
@@ -150,13 +150,17 @@ def bulk_verify():
                 with open("present.json", "w") as f:
                     json.dump(count_present_2, f, indent=4)
             # Perform Numverify validation for each number
-
+            # print(df)
             validation_results = {}
             validation_data = []
             NUMVERIFY_API_KEY = request.form.get('api_key')
             for index, row in df.iterrows():
 
-                raw_number = str(row['Mobile Number'])
+                # raw_number = str(row['Mobile Number'])
+                if math.isnan(row['Mobile Number']):
+                    raw_number = ""
+                else:
+                    raw_number = str(int(row['Mobile Number']))
 
                 # Perform Numverify validation directly on the raw phone number
 
